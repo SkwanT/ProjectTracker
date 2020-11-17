@@ -1,0 +1,74 @@
+﻿
+@model ProjectTracker.ViewModel.ReportsListViewModel
+
+@using (Html.BeginForm("Index", "Report", FormMethod.Get, new { @class = "form", @role = "form" }))
+{
+
+    @Html.HiddenFor(model => model.IsFilterVisible)
+
+<div class="form row">
+
+ <div class="col-md-7">
+        <div class="form-group form-group-sm col-md-3">
+            @Html.LabelFor(model => model.SearchFilter.FromDate, htmlAttributes: new { @class = "text-primary" }) <br>
+            @Html.EditorFor(model => model.SearchFilter.FromDate, new { htmlAttributes = new { @Value = ViewBag.SearchFilter.FromDate != null ? ViewBag.SearchFilter.FromDate.ToString("yyyy-MM-dd") : "", @class = "form-control", @style = "width:135px;" } })
+            @Html.ValidationMessageFor(model => model.SearchFilter.FromDate, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group form-group-sm col-md-5">
+            @Html.LabelFor(model => model.SearchFilter.ProjectName, htmlAttributes: new { @class = "text-primary" })<br>
+            @Html.EditorFor(model => model.SearchFilter.ProjectName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.SearchFilter.ProjectName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group form-group-sm col-md-12">
+            @*@Html.LabelFor(model => model.SearchFilter.ProjectLocation, htmlAttributes: new { @class = "text-primary" })<br>
+            @Html.EditorFor(model => model.SearchFilter.ProjectLocation, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.SearchFilter.ProjectLocation, "", new { @class = "text-danger" })*@
+        </div>
+    </div>
+  </div>
+
+
+<div class="form row">
+
+    <div class="col-md-7">
+        <div class="form-group form-group-sm col-md-3">
+            @Html.LabelFor(model => model.SearchFilter.ToDate, htmlAttributes: new { @class = "text-primary" }) <br>
+            @Html.EditorFor(model => model.SearchFilter.ToDate, new { htmlAttributes = new { @Value = ViewBag.SearchFilter.ToDate != null ? ViewBag.SearchFilter.ToDate.ToString("yyyy-MM-dd") : "", @class = "form-control", @style = "width:135px;" } })
+            @Html.ValidationMessageFor(model => model.SearchFilter.ToDate, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group form-group-sm col-md-2">
+            @Html.LabelFor(model => model.SearchFilter.ScriptTypeID, "Script Type", htmlAttributes: new { @class = "text-primary" })<br>
+            @Html.DropDownListFor(model => model.SearchFilter.ScriptTypeID, (IEnumerable<SelectListItem>)ViewBag.ScriptTypeID, "", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SearchFilter.ScriptTypeID, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group form-group-sm col-md-3">
+            @Html.LabelFor(model => model.SearchFilter.AuthorID, "Author", htmlAttributes: new { @class = "text-primary" })<br>
+            @Html.DropDownListFor(model => model.SearchFilter.AuthorID, (IEnumerable<SelectListItem>)ViewBag.AuthorID, "", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SearchFilter.AuthorID, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group form-group-sm col-md-4">
+            @Html.LabelFor(model => model.SearchFilter.isFinished, "Status", htmlAttributes: new { @class = "text-primary" })<br>
+            @Html.DropDownListFor(model => model.SearchFilter.isFinished, (IEnumerable<SelectListItem>)ViewBag.FilterStatus, "", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SearchFilter.isFinished, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group form-group-sm col-md-3">
+            <br>
+            <div class="input-group input-group-sm">
+                <button class="btn btn-sm btn-primary " type="submit"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</button>
+            </div>
+        </div>
+
+        <div class="form-group form-group-sm col-md-3">
+            <br>
+            <div class="input-group input-group-sm">
+                <a href="@Url.Action("Index", "Report" , new { isFilterVisible=true })" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp;Reset</a>
+            </div>
+        </div>
+ </div>
+</div>
+
+}

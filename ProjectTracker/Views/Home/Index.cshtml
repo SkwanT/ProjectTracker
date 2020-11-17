@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Scripts";
+}
+
+<div class="jumbotron" style="text-align:center;">
+    <h1>Scripts</h1>
+
+</div>
+
+<div class="row">
+    @if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Scripter")))
+    {
+    <div class="col-md-4">
+        <h2>Create New</h2>
+        <a href="@Url.Action("Create", "Script")" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New</a>
+    </div>
+    }
+    <div class="col-md-4">
+        <h2>View Scripts</h2>
+        <a href="@Url.Action("Index", "Script")" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Browse</a>
+
+    </div>
+
+    <div class="col-md-4">
+        <h2>Quick Search</h2>
+
+        @using (Html.BeginForm("Index", "Script", FormMethod.Get, new { @class = "form-inline", @role = "form" }))
+        {
+            <div class="input-group input-group-sm">
+                @Html.Editor("searchText", new { htmlAttributes = new { @class = "maxwidth form-control", placeholder = "Search", maxlength = 128, @style = "width:200px;" } })
+                <span class="input-group-btn">
+                    <button class="btn btn-primary " type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+
+            </div>
+        }
+
+    </div>
+</div>
+
+

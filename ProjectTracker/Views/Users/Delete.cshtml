@@ -1,0 +1,62 @@
+﻿@model ProjectTracker.Models.AuthorUserEdit
+
+@{
+    ViewBag.Title = "Delete - User";
+}
+
+<h2>Users - Delete</h2>
+<hr />
+<h3>Are you sure you want to delete this user?</h3>
+<div>
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.Hidden("previousurl", Model.previousurl)
+        <div class="form-actions no-color">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value="Delete" class="btn btn-primary  btn-sm" />
+                @Html.ActionLink("Back to List", null, null, null, new { @class = "btn btn-default btn-sm", href = Model.previousurl })
+            </div>
+        </div>
+    }
+</div>
+<br />
+<br />

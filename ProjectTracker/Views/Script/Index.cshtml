@@ -1,0 +1,200 @@
+﻿@model ProjectTracker.ViewModel.ScriptsListViewModel
+
+@using ProjectTracker.Helpers;
+
+@{
+    ViewBag.Title = "Index - Script";
+}
+
+<h2>Index</h2>
+<hr />
+
+@{
+    var filter = ViewBag.SearchFilter as ProjectTracker.ViewModel.SearchFilter;
+}
+
+@using (Html.BeginForm("Index", "Script", FormMethod.Get, new { @class = "form-inline", @role = "form" }))
+{
+<div class="row">
+
+    <div class="col-md-3 col-sm-3">
+        <div class="input-group input-group-sm">
+            @Html.Editor("searchText", new { htmlAttributes = new { @class = "maxwidth form-control", placeholder = "Search", maxlength = 128, @style = "width:200px;" } })
+            <span class="input-group-btn">
+                <button class="btn btn-primary " type="submit"><span class="glyphicon glyphicon-search"></span></button>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2">
+        <div class="col-md-7 col-sm-7">
+            <div class="input-group input-group-sm">
+                <a href="@Url.Action("Index", "Script", new { isFilterVisible = !Model.IsFilterVisible })" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Filter</a>
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-5" style="text-align:right;">
+            @if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Reporter")))
+            {
+                <a href="@Url.Action("Export", "Script", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.SortOrder })" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Export</a>
+            }
+        </div>
+    </div>
+       <div class="col-md-7 col-sm-7" style="text-align:right;">
+          @if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Scripter")))
+           {
+             <a href="@Url.Action("Create", "Script")" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New</a>
+           }
+       </div>
+</div>
+
+}
+
+    @if (Model.IsFilterVisible)
+    {
+        <br>
+        @Html.Partial("_Filter")
+    }
+
+    <br />
+    <table class="table table-condensed table-striped input-sm">
+        <tr class="text-primary">
+            <th>
+                @Html.ActionLink("Entry Date", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.DateSortParam })
+            </th>
+            <th>
+                @Html.ActionLink("Script Name", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.ScriptSortParam })
+            </th>
+            <th>
+                @Html.ActionLink("Type", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.TypeSortParam })
+            </th>
+            <th>
+                @Html.ActionLink("Author", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.AuthorSortParam })
+            </th>
+            <th>
+                @Html.ActionLink("Project Name", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.ProjectSortParam })
+            </th>
+            <th>
+                @Html.ActionLink("Status", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.StatusSortParam })
+            </th>
+            <th>
+                @Html.ActionLink("Location", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.LocationSortParam })
+            </th>
+            <th>
+                @Html.ActionLink("Comments", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.CommentSortParam })
+            </th>
+            <th class="text-right">Actions</th>
+        </tr>
+
+
+        @foreach (var item in Model.Scripts)
+        {
+
+
+            string str = "";
+            string std = "";
+            if (item.Report != null && item.Report.ScriptStatus && item.ProjectStatus)
+            {
+                str = "style=background-color:rgba(0,255,0,0.1);";
+            }
+
+            if (item.Report != null && item.Report.ScriptInFieldErrors)
+            {
+                str = "style=background-color:rgba(255,0,0,0.8);";
+            }
+
+
+            <tr @str>
+                
+                <td>
+                    @item.EntryDate.ToString("dd.MM.yyyy")
+                </td>
+                <td>
+                  <a href="@Url.Action("Details", "Script", new { id = item.ID })" data-toggle="tooltip" data-placement="top" title="Details">@item.ScriptName</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScriptType.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author.FullName)
+                </td>
+                <td>
+                    @{ if (String.IsNullOrEmpty(item.ProjectLink))
+                        {
+                            @Html.DisplayFor(modelItem => item.ProjectName)
+                        }
+                        else
+                        {
+                            <a href="file:///@item.ProjectLink" target="_blank">@item.ProjectName</a>
+                        }
+                    }
+
+                </td>
+
+                @if (!item.ProjectStatus || (item.Report == null || !item.Report.ScriptStatus))
+                {
+                    std = "style=background-color:rgba(255,255,0,0.2);";
+
+                }
+
+                <td @std>
+
+                    @Html.DisplayFor(modelItem => item.ProjectStatus)
+                </td>
+
+                <td>
+                    <a href="@item.ProjectLocation" target="_blank">@item.ProjectLocation</a>
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+
+                <td style="width:110px;" align="right">
+
+                    @if ((Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Researcher") || User.IsInRole("Reporter"))) || ViewBag.User == item.AuthorID)
+                    {
+
+                        <a href="@Url.Action("Edit", "Script", new { id = item.ID })" class="btn btn-xs glyphicon glyphicon-edit edit" data-toggle="tooltip" data-placement="top" title="Edit"></a>
+                        if (User.IsInRole("Reporter") || User.IsInRole("Admin"))
+                        {
+                            <a href="@Url.Action("Edit", "Report", new { id = item.ID })" class="btn btn-xs glyphicon glyphicon-stats report" data-toggle="tooltip" data-placement="top" title="Report"></a>
+                        }
+                        if (!User.IsInRole("Researcher") && !User.IsInRole("Reporter"))
+                        {
+                            <a href="@Url.Action("Delete", "Script", new { id = item.ID })" class="btn btn-xs glyphicon glyphicon-trash delete" data-toggle="tooltip" data-placement="top" title="Delete"></a>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+
+    @if (Model.PagingInfo.TotalItems > 0)
+    {
+        <div style="float:right;" class="input-sm"><b>Total records: @Model.PagingInfo.TotalItems </b></div>
+        <div class="input-sm"><b>Page @Model.PagingInfo.CurrentPage of @(Model.PagingInfo.TotalPages == 0 ? 1 : Model.PagingInfo.TotalPages) </b></div>
+    }
+    else
+    {
+        <h3 class="text-center text-muted">No results found</h3>
+    }
+    <div>
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.SortOrder, page = x }))
+    </div>
+
+@section scripts
+{
+  <script src="~/Content/tooltip.js"></script>
+  @Scripts.Render("~/bundles/jqueryval")
+
+}
+
+
+
+
+
+
+
+

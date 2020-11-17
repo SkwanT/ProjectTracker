@@ -1,0 +1,225 @@
+﻿@model ProjectTracker.ViewModel.ReportsListViewModel
+
+
+@{
+
+    ViewBag.Title = "Index - Report";
+}
+
+@using ProjectTracker.Helpers;
+
+
+<h2>Index</h2>
+
+<hr />
+
+@{
+    var filter = ViewBag.SearchFilter as ProjectTracker.ViewModel.SearchFilter;
+}
+
+
+@using (Html.BeginForm("Index", "Report", FormMethod.Get, new { @class = "form-inline", @role = "form" }))
+{
+<div class="row">
+
+    <div class="col-md-3 col-sm-3">
+        <div class="input-group input-group-sm">
+            @Html.Editor("searchText", new { htmlAttributes = new { @class = "maxwidth form-control", placeholder = "Search", maxlength = 128, @style = "width:200px;" } })
+            <span class="input-group-btn">
+                <button class="btn btn-primary " type="submit"><span class="glyphicon glyphicon-search"></span></button>
+            </span>
+        </div>
+    </div>
+
+    <div class="col-md-2 col-sm-2">
+        <div class="col-md-7 col-sm-7">
+            <div class="input-group input-group-sm">
+                <a href="@Url.Action("Index", "Report", new { isFilterVisible = !Model.IsFilterVisible })" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Filter</a>
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-5" style="text-align:right" ;>
+            @if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Reporter")))
+            {
+                <a href="@Url.Action("Export", "Report", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.SortOrder })" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Export</a>
+            }
+        </div>
+    </div>
+ </div>
+
+}
+
+@if (Model.IsFilterVisible)
+{
+ <br>
+ @Html.Partial("_Filter")
+ }
+
+<br />
+    <table class="table table-condensed   table-striped input-sm">
+        <tr class="text-primary ">
+            <th>
+
+                @Html.ActionLink("Complexity", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.ComplexSortParam })
+            </th>
+            <th>
+
+                @Html.ActionLink("Points", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.PointsSortParam })
+            </th>
+            <th>
+
+                @Html.ActionLink("Country", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.CountrySortParam })
+            </th>
+            <th>
+
+                @Html.ActionLink("Script", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.ScriptSortParam })
+            </th>
+            <th>
+
+                @Html.ActionLink("Type", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.TypeSortParam })
+            </th>
+            <th>
+
+                @Html.ActionLink("Author", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.AuthorSortParam })
+            </th>
+            <th>
+
+                @Html.ActionLink("Project", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.ProjectSortParam })
+            </th>
+            <th>
+
+                @Html.ActionLink("Task Date", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.TaskSortParam })
+            </th>
+            <th>
+
+                @Html.ActionLink("Start Date", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.StartSortParam })
+            </th>
+            <th>
+
+                @Html.ActionLink("End Date", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.EndSortParam })
+            </th>
+            <th>
+
+                @Html.ActionLink("Status", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.StatusSortParam })
+            </th>
+            <th>
+
+                @Html.ActionLink("Estimated Hours", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.EstimatedSortParam })
+            </th>
+            <th>
+
+                @Html.ActionLink("Actual Hours", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.ActualSortParam })
+            </th>
+            <th>
+
+                @Html.ActionLink("Test Hours", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.TestSortParam })
+            </th>
+            <th>
+
+                @Html.ActionLink("Test Errors", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.TestErrorsSortParam })
+            </th>
+            <th>
+
+                @Html.ActionLink("Field Errors", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.FieldErrorsSortParam })
+            </th>
+            <th>
+
+                @Html.ActionLink("Comments", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.CommentSortParam })
+            </th>
+            <th class="text-right">Actions</th>
+        </tr>
+
+        @foreach (var item in Model.Reports)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Complexity.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Points)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Script.ScriptName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Script.ScriptType.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Script.Author.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Script.ProjectName)
+                </td>
+                <td>
+                    @if (item.TaskSentDate != null)
+                    {
+                        @item.TaskSentDate.Value.ToString("dd.MM.yyyy")
+                    }
+                </td>
+                <td>
+                    @if (item.ScriptEntryDate != null)
+                    {
+                        @item.ScriptEntryDate.Value.ToString("dd.MM.yyyy")
+                    }
+                </td>
+                <td>
+                    @if (item.ScriptDoneDate != null)
+                    {
+                        @item.ScriptDoneDate.Value.ToString("dd.MM.yyyy")
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScriptStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstimatedScriptingHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActualScriptingHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActualTestingHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScriptInTestErrors)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScriptInFieldErrors)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScriptComments)
+                </td>
+
+                <td style="width:110px;" align="right">
+                    <a href="@Url.Action("Edit", "Report", new { id = item.ID })" class="btn btn-xs glyphicon glyphicon-edit edit" data-toggle="tooltip" data-placement="top" title="Edit"></a>
+                    <a href="@Url.Action("Delete", "Report", new { id = item.ID })" class="btn btn-xs glyphicon glyphicon-trash delete" data-toggle="tooltip" data-placement="top" title="Delete"></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+@if (Model.PagingInfo.TotalItems > 0)
+{
+ <div style="float:right;" class="input-sm"><b>Total records: @Model.PagingInfo.TotalItems </b></div>
+ <div class="input-sm"><b>Page @Model.PagingInfo.CurrentPage of @(Model.PagingInfo.TotalPages == 0 ? 1 : Model.PagingInfo.TotalPages) </b></div>
+}
+else
+{
+  <h3 class="text-center text-muted">No results found</h3>
+}
+
+
+
+
+<div>
+     @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.SortOrder, page = x }))
+</div>
+
+    @section scripts
+{
+   <script src="~/Content/tooltip.js"></script>
+}

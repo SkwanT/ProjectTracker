@@ -1,0 +1,136 @@
+﻿@model ProjectTracker.Models.Report
+
+@{
+    ViewBag.Title = "Delete - Report";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Report</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Complexity.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Complexity.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Points)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Points)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country.Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Script.ScriptName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Script.ScriptName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskSentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaskSentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScriptEntryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScriptEntryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScriptDoneDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScriptDoneDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScriptStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScriptStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstimatedScriptingHours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstimatedScriptingHours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualScriptingHours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualScriptingHours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualTestingHours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualTestingHours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScriptInTestErrors)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScriptInTestErrors)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScriptInFieldErrors)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScriptInFieldErrors)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScriptComments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScriptComments)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-primary" />
+        @Html.ActionLink("Back to List", "Index", null, null, new { @class = "btn btn-default btn-sm", href = ViewBag.Request })
+    </div>
+    }
+</div>

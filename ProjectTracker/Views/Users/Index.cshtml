@@ -1,0 +1,97 @@
+﻿@model IEnumerable<ProjectTracker.ViewModel.AuthorUserView>
+
+@{
+    ViewBag.Title = "Index - User";
+}
+
+
+
+
+<h2>Users</h2>
+<hr />
+
+
+@using (@Html.BeginForm("Index", "Users", FormMethod.Get, new { @class = "form-inline", @role = "form" }))
+{
+<div class="row">
+
+    <div class="col-md-4 col-sm-4">
+        <div class="input-group input-group-sm">
+            @Html.Editor("Search", new { htmlAttributes = new { @class = "maxwidth form-control ", placeholder = "Search for user (Last name or First name)", maxlength = 128, @style = "width:256px;" } })
+            <span class="input-group-btn">
+                <button class="btn btn-primary " type="submit"><span class="glyphicon glyphicon-search"></span></button>
+            </span>
+        </div>
+    </div>
+
+
+    <div class="col-md-8" style="text-align:right;">
+        <a href="@Url.Action("Create", "Users")" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New</a>
+
+    </div>
+</div>
+
+}
+
+<br />
+<table class="table table-condensed   table-striped input-sm">
+    <thead>
+        <tr class="text-primary ">
+            <th>
+                @Html.ActionLink("Last Name", "Index", new { Search = ViewBag.Search, sortOrder = ViewBag.LastNameSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("First Name", "Index", new { Search = ViewBag.Search, sortOrder = ViewBag.FirstNameSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Username", "Index", new { Search = ViewBag.Search, sortOrder = ViewBag.UserNameSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Roles", "Index", new { Search = ViewBag.Search, sortOrder = ViewBag.RolesSortParm })
+            </th>
+            <th class="text-center">
+                @Html.ActionLink("Active", "Index", new { Search = ViewBag.Search, sortOrder = ViewBag.ActiveSortParm })
+            </th>
+            <th class="text-right">Actions</th>
+        </tr>
+    </thead>
+
+
+
+
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleName)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td align="right">
+                    <a href="@Url.Action("Edit", "Users", new { id = item.ID })" class="btn btn-xs glyphicon glyphicon-edit edit" data-toggle="tooltip" data-placement="top" title="Edit"></a>
+                    <a href="@Url.Action("Delete", "Users", new { id = item.ID })" class="btn btn-xs glyphicon glyphicon-trash delete" data-toggle="tooltip" data-placement="top" title="Delete"></a>
+                    <a href="@Url.Action("ResetPassword", "Users", new { id = item.ID, username = item.UserName })" class="btn btn-xs glyphicon glyphicon-lock view" data-toggle="tooltip" data-placement="top" title="Reset Password"></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="input-sm"><b>Records: @ViewBag.n </b></div>
+
+
+@section scripts
+{
+    <script src="~/Content/tooltip.js"></script>
+}

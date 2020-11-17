@@ -1,0 +1,122 @@
+﻿@model ProjectTracker.ViewModel.ScriptDetailsViewModel
+
+@{
+    ViewBag.Title = "Details - Scripts";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Script</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScriptName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScriptName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScriptType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScriptType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CoAuthor1)
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.CoAuthor1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CoAuthor2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoAuthor2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EntryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EntryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectLink)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectLocation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+    </dl>
+
+    <div class="col-md-2 col-sm-2">
+        <div class="col-md-4 col-sm-4">
+            @if (User.IsInRole("Admin") || (User.IsInRole("Scripter") && ViewBag.User == Model.AuthorID))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary" })
+            }
+        </div>
+        <div class="col-md-8 col-sm-8">
+            @Html.ActionLink("Back to List", "Index", null, null, new { @class = "btn btn-default btn-sm", href = ViewBag.Request })
+        </div>
+    </div>
+    <br>
+</div>
+<br>
+
+
+
+
+
+
