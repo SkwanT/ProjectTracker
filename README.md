@@ -5,12 +5,12 @@ ASP.NET MVC 5 web app for tracking projects and creating reports
 
 ### Build project to install packages
 
-### To run create logging DB, run from Package Manager Console:
+### To create logging DB, run from Package Manager Console:
 ```
 PM> update-database -ConfigurationTypeName ProjectTracker.Migrations.Audit.Configuration
 ```
 
-### To run seed and create admin user account, run from Package Manager Console:
+### To seed and create admin user account, run from Package Manager Console:
 ```
 PM> update-database -ConfigurationTypeName ProjectTracker.Migrations.ProjectTracker.Configuration
 ```
