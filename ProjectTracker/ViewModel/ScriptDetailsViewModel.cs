@@ -24,7 +24,6 @@ namespace ProjectTracker.ViewModel
         public string CoAuthor2 { get; set; }
 
         [Display(Name = "Entry Date")]
-
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime EntryDate { get; set; }
 
@@ -39,6 +38,7 @@ namespace ProjectTracker.ViewModel
 
         [Display(Name = "Project Location")]
         public string ProjectLocation { get; set; }
+
         public string Comments { get; set; }
     }
 }

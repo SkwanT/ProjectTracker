@@ -16,7 +16,6 @@ namespace ProjectTracker.DAL
 
         public string Login(string UserName, string Password)
         {
-
             string result = "";
 
             Author users = context.Authors.Where(user => user.UserName == UserName && user.Active == true).SingleOrDefault();
@@ -32,7 +31,6 @@ namespace ProjectTracker.DAL
             return result;
         }
 
-
         public bool ChangePassword(UserChangePassword ucp, int EmployeeID)
         {
             bool result = false;
@@ -43,7 +41,6 @@ namespace ProjectTracker.DAL
             {
                 if (SaltedHash.Verify(user.SecurityStamp, user.PasswordHash, ucp.OldPassword) == true)
                 {
-
                     SaltedHash sh = new SaltedHash(ucp.Password);
                     user.PasswordHash = sh.Hash;
                     user.SecurityStamp = sh.SecurityStamp;
@@ -64,7 +61,6 @@ namespace ProjectTracker.DAL
             context.SaveChanges();
         }
 
-
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing)
@@ -84,6 +80,5 @@ namespace ProjectTracker.DAL
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
     }
 }

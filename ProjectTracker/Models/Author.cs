@@ -27,8 +27,10 @@ namespace ProjectTracker.Models
         [Required]
         [MaxLength(256)]
         public string UserName { get; set; }
+
         [Required]
         public string PasswordHash { get; set; }
+
         [Required]
         public string SecurityStamp { get; set; }
 
@@ -49,13 +51,12 @@ namespace ProjectTracker.Models
         [Required]
         [MaxLength(128)]
         public string UpdateUserID { get; set; }
+
         [Required]
         public DateTime UpdateDate { get; set; }
+
         public long? AdrianaID { get; set; }
-
-
     }
-
 
     public class AuthorUserEdit
     {
@@ -88,13 +89,10 @@ namespace ProjectTracker.Models
         public bool Active { get; set; }
 
         public string previousurl { get; set; }
-
     }
-
 
     public class NewUser
     {
-
         [Required]
         [MaxLength(128)]
         [Display(Name = "First Name")]
@@ -124,12 +122,10 @@ namespace ProjectTracker.Models
 
         [Required]
         [Display(Name = "Active")]
-
         public bool Active { get; set; }
 
         public string previousurl { get; set; }
     }
-
 
     public class ResetPassword
     {
@@ -152,13 +148,8 @@ namespace ProjectTracker.Models
         public string previousurl { get; set; }
     }
 
-
-
     public class previousUrl
     {
         public string previousurl { get; set; }
     }
-
-
-
 }

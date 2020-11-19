@@ -10,7 +10,6 @@ namespace ProjectTracker.DAL
 {
     public class AuthorRepository : IAuthorRepository, IDisposable
     {
-
         private ProjectTrackerContext context;
 
         public AuthorRepository(ProjectTrackerContext context)
@@ -63,7 +62,6 @@ namespace ProjectTracker.DAL
                 edituser.Role = user.Role;
 
                 edituser.UserName = user.UserName;
-
             }
             return edituser;
         }
@@ -129,7 +127,6 @@ namespace ProjectTracker.DAL
             {
                 return true;
             }
-
         }
 
         public bool ResetPassword(ResetPassword rp, int EmployeeID)
@@ -170,7 +167,6 @@ namespace ProjectTracker.DAL
                 Author user = context.Authors.Find(edituser.ID);
                 if (user != null)
                 {
-
                     user.Active = edituser.Active;
                     user.FirstName = edituser.FirstName;
                     user.LastName = edituser.LastName;
@@ -180,7 +176,6 @@ namespace ProjectTracker.DAL
                     user.UserName = edituser.UserName;
                     context.Entry(user).State = System.Data.Entity.EntityState.Modified;
                     result = true;
-
                 }
             }
             catch (Exception ex)
@@ -209,7 +204,5 @@ namespace ProjectTracker.DAL
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
-
     }
 }

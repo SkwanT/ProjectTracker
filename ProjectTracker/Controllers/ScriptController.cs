@@ -18,7 +18,6 @@ namespace ProjectTracker.Controllers
     [Authorize]
     public class ScriptController : Controller
     {
-
         private IScriptRepository scriptRepository;
 
         public ScriptController(IScriptRepository scriptRepository)
@@ -30,7 +29,6 @@ namespace ProjectTracker.Controllers
 
         public ActionResult Index(SearchFilter searchFilter, string searchText, bool isFilterVisible = false, string sortOrder = "date_desc", int page = 1)
         {
-
             List<SelectListItem> filterStatus = new List<SelectListItem>() {
                 new SelectListItem {Text = "Unfinished", Value = false.ToString()},
                 new SelectListItem {Text = "Finished", Value =  true.ToString()                },
@@ -85,7 +83,6 @@ namespace ProjectTracker.Controllers
                 IsFilterVisible = isFilterVisible
             };
 
-
             if (Request.IsAuthenticated)
             {
                 ViewBag.User = Convert.ToInt32(System.Web.HttpContext.Current.Session["userID"]);
@@ -94,11 +91,8 @@ namespace ProjectTracker.Controllers
             ViewBag.ScriptTypeID = new SelectList(scriptRepository.GetScriptTypes(), "ID", "Type");
             ViewBag.AuthorID = new SelectList(scriptRepository.GetAuthorByActiveUser(null), "ID", "FullName", model.SearchFilter.AuthorID);
 
-
             return View(model);
         }
-
-
 
         [Authorize(Roles = "Admin,Scripter")]
         public ActionResult Create()
@@ -139,18 +133,15 @@ namespace ProjectTracker.Controllers
             {
                 if (ModelState.IsValid)
                 {
-
                     if (script.AuthorID != script.CoAuthor1ID && script.AuthorID != script.CoAuthor2ID)
                     {
                         if (script.CoAuthor1ID != script.CoAuthor2ID || script.CoAuthor1ID == null)
                         {
-
                             if (scriptRepository.InsertScript(script))
                             {
                                 scriptRepository.Save();
                                 return RedirectToAction("Index");
                             }
-
                         }
                         else
                         {
@@ -166,10 +157,8 @@ namespace ProjectTracker.Controllers
             }
             catch
             {
-
                 ModelState.AddModelError(string.Empty, "Unable to save changes. Try again, and if the problem persists contact your system administrator.");
             }
-
 
             ViewBag.ScriptTypeID = new SelectList(scriptRepository.GetScriptTypes(), "ID", "Type", script.ScriptTypeID);
 
@@ -180,11 +169,9 @@ namespace ProjectTracker.Controllers
             return View(script);
         }
 
-
         [Authorize(Roles = "Admin,Scripter,Researcher,Reporter")]
         public ActionResult Edit(int? id)
         {
-
             ViewBag.Request = System.Web.HttpContext.Current.Session["URL"];
 
             if (id == null)
@@ -198,7 +185,6 @@ namespace ProjectTracker.Controllers
             {
                 return HttpNotFound();
             }
-
 
             if (Request.IsAuthenticated && User.IsInRole("Scripter"))
             {
@@ -225,7 +211,6 @@ namespace ProjectTracker.Controllers
         [Authorize(Roles = "Admin,Scripter,Researcher,Reporter")]
         public ActionResult Edit([Bind(Include = "ID,EntryDate,ScriptName,ScriptFamily,ProjectName,ProjectLink,ProjectStatus,ProjectLocation,Comments,AuthorID,ScriptTypeID,CoAuthor1ID,CoAuthor2ID")] Script script)
         {
-
             ViewBag.Request = System.Web.HttpContext.Current.Session["URL"];
 
             try
@@ -236,7 +221,6 @@ namespace ProjectTracker.Controllers
                     {
                         if (script.CoAuthor1ID != script.CoAuthor2ID || script.CoAuthor1ID == null)
                         {
-
                             if (scriptRepository.UpdateScript(script))
                             {
                                 scriptRepository.Save();
@@ -267,9 +251,7 @@ namespace ProjectTracker.Controllers
             ViewBag.ScriptTypeID = new SelectList(scriptRepository.GetScriptTypes(), "ID", "Type", script.ScriptTypeID);
 
             return View(script);
-
         }
-
 
         public ActionResult Details(int? id)
         {
@@ -290,7 +272,6 @@ namespace ProjectTracker.Controllers
             return View(script);
         }
 
-
         [Authorize(Roles = "Admin,Scripter,Researcher,Reporter")]
         public ActionResult Delete(int? id)
         {
@@ -310,7 +291,6 @@ namespace ProjectTracker.Controllers
             return View(script);
         }
 
-
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Scripter,Researcher,Reporter")]
@@ -326,12 +306,10 @@ namespace ProjectTracker.Controllers
             return Redirect(ViewBag.Request);
         }
 
-
         public bool IsScriptNameExists(string scriptname, int? id)
         {
             return scriptRepository.IsExists(scriptname, id);
         }
-
 
         [HttpPost]
         public JsonResult IsScriptExists(string scriptname, int? id)
@@ -342,13 +320,10 @@ namespace ProjectTracker.Controllers
             return result;
         }
 
-
         public FileContentResult Export(SearchFilter searchFilter, string searchText, string sortOrder = "date_desc")
         {
-
             var fileDownloadName = String.Format("Scripts_" + DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss") + ".xlsx");
             const string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-
 
             var scripts = scriptRepository.GetScripts(searchText);
 
@@ -381,6 +356,5 @@ namespace ProjectTracker.Controllers
                 scriptRepository.Dispose();
             base.Dispose(disposing);
         }
-
     }
 }

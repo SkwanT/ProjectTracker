@@ -37,7 +37,6 @@ namespace Encryption
             return Convert.ToBase64String(resultArray, 0, resultArray.Length);
         }
 
-
         public static string Decrypt(string cipherString, string key)
         {
             byte[] keyArray;
@@ -53,6 +52,5 @@ namespace Encryption
             tdes.Clear();
             return UTF8Encoding.UTF8.GetString(resultArray);
         }
-
     }
 }

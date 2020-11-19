@@ -6,7 +6,6 @@ namespace ProjectTracker.Helpers
 {
     public static class PagingHelper
     {
-
         public static MvcHtmlString PageLinks(this HtmlHelper html, PagingInfo pagingInfo, Func<int, string> pageUrl)
         {
             StringBuilder result = new StringBuilder();
@@ -14,7 +13,6 @@ namespace ProjectTracker.Helpers
             int pageGap = (pagingInfo.TotalPages - pagingInfo.CurrentPage - 5) > 0 ? (pagingInfo.TotalPages - pagingInfo.CurrentPage - 5) : 0;
             int min = pagingInfo.CurrentPage - 4 < 1 ? 1 : pagingInfo.CurrentPage - 4;
             int max = (pagingInfo.CurrentPage + 10) > pagingInfo.TotalPages ? (pagingInfo.TotalPages - pageGap) : (pagingInfo.CurrentPage < 6 ? 10 : pagingInfo.CurrentPage + 5);
-
 
             for (int i = min; i <= max; i++)
             {

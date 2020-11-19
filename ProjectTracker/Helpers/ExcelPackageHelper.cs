@@ -27,7 +27,6 @@ namespace ProjectTracker.Helpers
             ws.Cells[1, 8].Value = "Location";
             ws.Cells[1, 9].Value = "Comments";
 
-
             for (int i = 0; i < datasource.Count(); i++)
             {
                 ws.Cells[i + 2, 1].Value = datasource.ElementAt(i).EntryDate;
@@ -44,7 +43,6 @@ namespace ProjectTracker.Helpers
 
             using (ExcelRange rng = ws.Cells["A1:I1"])
             {
-
                 rng.Style.Font.Bold = true;
                 rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
                 rng.Style.Fill.BackgroundColor.SetColor(Color.LightGreen);
@@ -54,7 +52,6 @@ namespace ProjectTracker.Helpers
             ws.Cells.AutoFitColumns();
             return pck;
         }
-
 
         private static string ExtractProjectNumbering(string input)
         {
@@ -73,7 +70,6 @@ namespace ProjectTracker.Helpers
 
         public static ExcelPackage GenerateExcelFile(List<Report> datasource)
         {
-
             ExcelPackage pck = new ExcelPackage();
 
             ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Sheet 1");
@@ -125,7 +121,6 @@ namespace ProjectTracker.Helpers
 
             using (ExcelRange rng = ws.Cells["A1:Q1"])
             {
-
                 rng.Style.Font.Bold = true;
                 rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
                 rng.Style.Fill.BackgroundColor.SetColor(Color.LightGreen);

@@ -17,6 +17,5 @@ namespace ProjectTracker.Controllers
 
             return View();
         }
-
     }
 }

@@ -35,6 +35,5 @@ namespace ProjectTracker.ViewModel
 
         [Display(Name = "Status")]
         public bool? isFinished { get; set; }
-
     }
 }

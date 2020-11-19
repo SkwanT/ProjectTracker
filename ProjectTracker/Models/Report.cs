@@ -9,11 +9,15 @@ namespace ProjectTracker.Models
         [ForeignKey("Script")]
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
+
         [Display(Name = "Complexity")]
         public int ComplexityID { get; set; }
+
         public virtual Complexity Complexity { get; set; }
+
         [Display(Name = "Country")]
         public int CountryID { get; set; }
+
         public virtual Country Country { get; set; }
 
         [Display(Name = "Points")]
@@ -58,8 +62,7 @@ namespace ProjectTracker.Models
 
         [Display(Name = "Comments")]
         public string ScriptComments { get; set; }
+
         public virtual Script Script { get; set; }
     }
-
-
 }

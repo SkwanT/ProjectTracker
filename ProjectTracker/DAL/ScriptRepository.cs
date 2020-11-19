@@ -10,8 +10,8 @@ namespace ProjectTracker.DAL
 {
     public class ScriptRepository : IScriptRepository
     {
-
         private ProjectTrackerContext context;
+
         public ScriptRepository(ProjectTrackerContext context)
         {
             this.context = context;
@@ -21,7 +21,6 @@ namespace ProjectTracker.DAL
         {
             return context.Authors.Include(u => u.Role).Where(r => r.Role.RoleName.Contains("Scripter")).OrderBy(o => o.LastName);
         }
-
 
         public IEnumerable<Author> GetAuthorByActiveUser(int? user)
         {
@@ -55,7 +54,6 @@ namespace ProjectTracker.DAL
 
         public ScriptDetailsViewModel GetScriptDetailsByID(int? id)
         {
-
             SqlParameter par1 = new SqlParameter("ID", System.Data.SqlDbType.Int);
             par1.Value = id;
 
@@ -145,7 +143,6 @@ namespace ProjectTracker.DAL
             }
         }
 
-
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing)
@@ -165,6 +162,5 @@ namespace ProjectTracker.DAL
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
     }
 }

@@ -19,7 +19,6 @@ namespace ProjectTracker.Controllers
     [Authorize(Roles = "Admin,Reporter")]
     public class ReportController : Controller
     {
-
         private IReportRepository reportRepository;
         private IReportService reportService;
 
@@ -33,7 +32,6 @@ namespace ProjectTracker.Controllers
 
         public ActionResult Index(SearchFilter searchFilter, string searchText, bool isFilterVisible = false, string sortOrder = "task_desc", int page = 1)
         {
-
             List<SelectListItem> filterStatus = new List<SelectListItem>() {
                 new SelectListItem {Text = "Unfinished", Value = false.ToString()},
                 new SelectListItem {Text = "Finished", Value =  true.ToString()},
@@ -104,8 +102,6 @@ namespace ProjectTracker.Controllers
             return View(model);
         }
 
-
-
         public ActionResult Create(int? id)
         {
             ViewBag.Request = System.Web.HttpContext.Current.Session["URL"];
@@ -127,7 +123,6 @@ namespace ProjectTracker.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-
             ReportDataFromBase newReport = reportService.GetDataFromServers(id);
 
             if (!string.IsNullOrEmpty(newReport.ErrorReportMessage))
@@ -142,7 +137,6 @@ namespace ProjectTracker.Controllers
             report.ActualTestingHours = newReport.TestHours;
             report.EstimatedScriptingHours = newReport.EstimatedHours;
 
-
             if (User.IsInRole("Admin") || User.IsInRole("Reporter"))
             {
                 return View(report);
@@ -151,9 +145,7 @@ namespace ProjectTracker.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -184,7 +176,6 @@ namespace ProjectTracker.Controllers
                     reportRepository.Save();
                     return Redirect(ViewBag.Request);
                 }
-
             }
 
             ViewBag.ComplexityID = new SelectList(reportRepository.GetComplexities(), "ID", "Type", report.ComplexityID);
@@ -195,7 +186,6 @@ namespace ProjectTracker.Controllers
 
         public ActionResult Edit(int? id, bool refresh = false)
         {
-
             ViewBag.Request = System.Web.HttpContext.Current.Session["URL"];
 
             int user = Convert.ToInt32(System.Web.HttpContext.Current.Session["userID"]);
@@ -220,7 +210,6 @@ namespace ProjectTracker.Controllers
 
             if (User.IsInRole("Admin") || User.IsInRole("Reporter"))
             {
-
                 if (refresh)
                 {
                     ReportDataFromBase newReport = reportService.GetDataFromServers(id);
@@ -251,15 +240,12 @@ namespace ProjectTracker.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,ComplexityID,Points,CountryID,TaskSentDate,ScriptEntryDate,ScriptDoneDate,ScriptStatus,EstimatedScriptingHours,ActualScriptingHours,ActualTestingHours,ScriptInTestErrors,ScriptInFieldErrors,ScriptComments")] Report report)
         {
-
             ViewBag.Request = System.Web.HttpContext.Current.Session["URL"];
 
             if (ModelState.IsValid)
@@ -279,7 +265,6 @@ namespace ProjectTracker.Controllers
 
         public ActionResult Delete(int? id)
         {
-
             ViewBag.Request = System.Web.HttpContext.Current.Session["URL"];
 
             if (id == null)
@@ -300,7 +285,6 @@ namespace ProjectTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-
             ViewBag.Request = System.Web.HttpContext.Current.Session["URL"];
 
             if (reportRepository.DeleteReport(id))
@@ -313,7 +297,6 @@ namespace ProjectTracker.Controllers
 
         public FileContentResult Export(SearchFilter searchFilter, string searchText, string sortOrder = "task_desc")
         {
-
             var fileDownloadName = String.Format("Report_" + DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss") + ".xlsx");
             const string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
@@ -348,6 +331,5 @@ namespace ProjectTracker.Controllers
                 reportRepository.Dispose();
             base.Dispose(disposing);
         }
-
     }
 }

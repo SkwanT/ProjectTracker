@@ -10,6 +10,7 @@ namespace ProjectTracker.DAL
     public class ReportRepository : IReportRepository
     {
         private ProjectTrackerContext context;
+
         public ReportRepository(ProjectTrackerContext context)
         {
             this.context = context;
@@ -65,7 +66,6 @@ namespace ProjectTracker.DAL
 
         public bool UpdateReport(Report report)
         {
-
             try
             {
                 context.Entry(report).State = EntityState.Modified;
@@ -134,6 +134,5 @@ namespace ProjectTracker.DAL
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
     }
 }

@@ -15,9 +15,7 @@ namespace ProjectTracker.Services
         {
             var report = new ReportDataFromBase();
 
-            //Getting data from multiple servers....
-            //
-            //
+            //Get, calculate, map and return data from multiple servers
 
             return report;
         }

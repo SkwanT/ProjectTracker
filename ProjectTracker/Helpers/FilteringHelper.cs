@@ -55,7 +55,5 @@ namespace ProjectTracker.Helpers
 
             return reports;
         }
-
     }
-
 }

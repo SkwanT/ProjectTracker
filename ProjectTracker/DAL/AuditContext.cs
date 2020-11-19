@@ -1,7 +1,6 @@
 ﻿using ProjectTracker.Models;
 using System.Data.Entity;
 
-
 namespace ProjectTracker.DAL
 {
     public class AuditContext : DbContext
@@ -11,6 +10,7 @@ namespace ProjectTracker.DAL
         {
             Database.SetInitializer<AuditContext>(null);
         }
+
         public virtual DbSet<AuditTB> AuditTBs { get; set; }
     }
 }

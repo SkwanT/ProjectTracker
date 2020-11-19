@@ -18,5 +18,4 @@ namespace ProjectTracker.Infrastructure
             base.OnResultExecuting(filterContext);
         }
     }
-
 }

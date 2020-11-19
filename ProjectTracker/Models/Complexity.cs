@@ -10,7 +10,7 @@ namespace ProjectTracker.Models
         [Required]
         [StringLength(50)]
         public string Type { get; set; }
-        public virtual ICollection<Report> Reports { get; set; }
 
+        public virtual ICollection<Report> Reports { get; set; }
     }
 }

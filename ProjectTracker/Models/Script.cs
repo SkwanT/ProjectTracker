@@ -13,7 +13,6 @@ namespace ProjectTracker.Models
         [Display(Name = "Entry Date")]
         public DateTime EntryDate { get; set; } = DateTime.Now;
 
-
         [Display(Name = "Script Name")]
         [Remote("IsScriptExists", "Script", AdditionalFields = "ID", HttpMethod = "POST", ErrorMessage = "Script name already exists. Please enter a different script name.")]
         [Required]
@@ -23,6 +22,7 @@ namespace ProjectTracker.Models
         [Required]
         [Display(Name = "Type")]
         public int ScriptTypeID { get; set; }
+
         public virtual ScriptType ScriptType { get; set; }
 
         [Required]
@@ -43,9 +43,11 @@ namespace ProjectTracker.Models
         public string ProjectLocation { get; set; }
 
         public string Comments { get; set; }
+
         [Required]
         [Display(Name = "Author")]
         public int AuthorID { get; set; }
+
         public virtual Author Author { get; set; }
 
         [Display(Name = "Co-Author 1")]
@@ -53,10 +55,10 @@ namespace ProjectTracker.Models
 
         [Display(Name = "Co-Author 2")]
         public int? CoAuthor2ID { get; set; }
+
         public virtual Report Report { get; set; }
 
         [Required]
         public bool Deleted { get; set; }
-
     }
 }

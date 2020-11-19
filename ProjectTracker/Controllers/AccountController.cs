@@ -10,7 +10,6 @@ namespace ProjectTracker.Controllers
 {
     public class AccountController : Controller
     {
-
         private IAccountRepository accountRepository;
 
         public AccountController(IAccountRepository accountRepository)
@@ -18,15 +17,9 @@ namespace ProjectTracker.Controllers
             this.accountRepository = accountRepository;
         }
 
-
         [HttpGet]
         public ActionResult Login()
         {
-            //User u = new User();
-            //u.UserName = "admin";
-            //u.Password = "admin";
-            //return View(u);
-
             return View();
         }
 
@@ -47,23 +40,19 @@ namespace ProjectTracker.Controllers
                     var AuthCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encriptedTicket);
                     HttpContext.Response.Cookies.Add(AuthCookie);
 
-
                     if (returnUrl != "")
                     {
                         return Redirect(returnUrl);
                     }
                     else
                     {
-
                         return RedirectToAction("Index", "home");
                     }
-
                 }
                 else
                 {
                     model.Password = "";
                 }
-
             }
             return View(model);
         }
@@ -71,7 +60,6 @@ namespace ProjectTracker.Controllers
         [Authorize]
         public ActionResult LogOff()
         {
-
             FormsAuthentication.SignOut();
 
             Session.Abandon();
@@ -80,7 +68,6 @@ namespace ProjectTracker.Controllers
 
             return RedirectToAction("Login", "Account");
         }
-
 
         [Authorize]
         [HttpGet]
@@ -109,7 +96,6 @@ namespace ProjectTracker.Controllers
                     {
                         ModelState.AddModelError(string.Empty, "Unable to save changes. Something's wrong.");
                     }
-
                 }
             }
             catch (DataException)
@@ -133,6 +119,5 @@ namespace ProjectTracker.Controllers
                 accountRepository.Dispose();
             base.Dispose(disposing);
         }
-
     }
 }

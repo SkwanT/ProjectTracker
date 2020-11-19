@@ -4,13 +4,8 @@ using ProjectTracker.Models;
 using System;
 using System.Data.Entity.Migrations;
 
-
 namespace ProjectTracker.Migrations.ProjectTracker
 {
-
-
-
-
     internal sealed class Configuration : DbMigrationsConfiguration<ProjectTrackerContext>
     {
         public Configuration()
@@ -21,12 +16,6 @@ namespace ProjectTracker.Migrations.ProjectTracker
 
         protected override void Seed(ProjectTrackerContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
-
-
             context.Roles.AddOrUpdate(x => x.ID,
                 new Role() { ID = 1, RoleName = "Admin" },
                 new Role() { ID = 2, RoleName = "Reporter" },
@@ -59,8 +48,6 @@ namespace ProjectTracker.Migrations.ProjectTracker
                 new Country() { ID = 1, Code = "XK", Name = "Kosovo" }
             );
 
-
-
             Author admin = new Author();
             SaltedHash sh = new SaltedHash("admin");
 
@@ -78,10 +65,7 @@ namespace ProjectTracker.Migrations.ProjectTracker
             admin.UpdateDate = DateTime.Now;
             admin.UpdateUserID = "1";
 
-
             context.Authors.AddOrUpdate(x => x.ID, admin);
-
-
         }
     }
 }

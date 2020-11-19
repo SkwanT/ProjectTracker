@@ -20,14 +20,12 @@ namespace Encryption
             Hash = ComputeHash(Salt, password);
         }
 
-
-        static string ComputeHash(string salt, string password)
+        private static string ComputeHash(string salt, string password)
         {
             var saltBytes = Convert.FromBase64String(salt);
             using (var rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, saltBytes, 1000))
                 return Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256));
         }
-
 
         public static bool Verify(string securityStamp, string passwordHash, string password)
         {

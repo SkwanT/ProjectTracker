@@ -17,6 +17,5 @@ namespace ProjectTracker.DAL
         public DbSet<Report> Reports { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Complexity> Complexities { get; set; }
-
     }
 }

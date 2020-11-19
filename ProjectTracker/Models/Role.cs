@@ -9,6 +9,7 @@ namespace ProjectTracker.Models
         [Required]
         [StringLength(50)]
         public string RoleName { get; set; }
+
         public object RoleID { get; internal set; }
     }
 }
