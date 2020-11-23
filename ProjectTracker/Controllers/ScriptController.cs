@@ -27,7 +27,7 @@ namespace ProjectTracker.Controllers
 
         public int PageSize = 15;
 
-        public ActionResult Index(SearchFilter searchFilter, string searchText, bool isFilterVisible = false, string sortOrder = "date_desc", int page = 1)
+        public ActionResult Index(SearchFilter searchFilter, ScriptsSort scriptsSort, string searchText, bool isFilterVisible = false, string sortOrder = "date_desc", int page = 1)
         {
             List<SelectListItem> filterStatus = new List<SelectListItem>() {
                 new SelectListItem {Text = "Unfinished", Value = false.ToString()},
@@ -38,15 +38,6 @@ namespace ProjectTracker.Controllers
 
             System.Web.HttpContext.Current.Session["URL"] = Request.Url.AbsoluteUri.ToString();
             System.Web.HttpContext.Current.Session["Scriptsort"] = sortOrder.ToString();
-
-            ViewBag.DateSortParam = sortOrder == "date" ? "date_desc" : "date";
-            ViewBag.ScriptSortParam = sortOrder == "script" ? "script_desc" : "script";
-            ViewBag.TypeSortParam = sortOrder == "type" ? "type_desc" : "type";
-            ViewBag.AuthorSortParam = sortOrder == "author" ? "author_desc" : "author";
-            ViewBag.ProjectSortParam = sortOrder == "project" ? "project_desc" : "project";
-            ViewBag.StatusSortParam = sortOrder == "status" ? "status_desc" : "status";
-            ViewBag.LocationSortParam = sortOrder == "location" ? "location_desc" : "location";
-            ViewBag.CommentSortParam = sortOrder == "comment" ? "comment_desc" : "comment";
 
             var scripts = scriptRepository.GetScripts(searchText);
 
@@ -62,7 +53,9 @@ namespace ProjectTracker.Controllers
                 }
             }
 
-            ViewBag.SortOrder = sortOrder;
+            scriptsSort = SortingHelper.SetSortScripts(scriptsSort, sortOrder);
+
+            ViewBag.SortOrder = scriptsSort;
 
             scripts = SortingHelper.SortScripts(scripts, sortOrder);
 

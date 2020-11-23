@@ -7,6 +7,43 @@ namespace ProjectTracker.Helpers
 {
     public static class SortingHelper
     {
+        public static ScriptsSort SetSortScripts(ScriptsSort scriptsSort, string sortOrder)
+        {
+            scriptsSort.DateSortParam = sortOrder == "date" ? "date_desc" : "date";
+            scriptsSort.ScriptSortParam = sortOrder == "script" ? "script_desc" : "script";
+            scriptsSort.TypeSortParam = sortOrder == "type" ? "type_desc" : "type";
+            scriptsSort.AuthorSortParam = sortOrder == "author" ? "author_desc" : "author";
+            scriptsSort.ProjectSortParam = sortOrder == "project" ? "project_desc" : "project";
+            scriptsSort.StatusSortParam = sortOrder == "status" ? "status_desc" : "status";
+            scriptsSort.LocationSortParam = sortOrder == "location" ? "location_desc" : "location";
+            scriptsSort.CommentSortParam = sortOrder == "comment" ? "comment_desc" : "comment";
+
+            return scriptsSort;
+        }
+
+        public static ReportsSort SetSortReports(ReportsSort reportsSort, string sortOrder)
+        {
+            reportsSort.ComplexSortParam = sortOrder == "complex" ? "complex_desc" : "complex";
+            reportsSort.PointsSortParam = sortOrder == "points" ? "points_desc" : "points";
+            reportsSort.CountrySortParam = sortOrder == "country" ? "country_desc" : "country";
+            reportsSort.ScriptSortParam = sortOrder == "script" ? "script_desc" : "script";
+            reportsSort.TypeSortParam = sortOrder == "type" ? "type_desc" : "type";
+            reportsSort.AuthorSortParam = sortOrder == "author" ? "author_desc" : "author";
+            reportsSort.ProjectSortParam = sortOrder == "project" ? "project_desc" : "project";
+            reportsSort.TaskSortParam = sortOrder == "task" ? "task_desc" : "task";
+            reportsSort.StartSortParam = sortOrder == "start" ? "start_desc" : "start";
+            reportsSort.EndSortParam = sortOrder == "end" ? "end_desc" : "end";
+            reportsSort.StatusSortParam = sortOrder == "status" ? "status_desc" : "status";
+            reportsSort.EstimatedSortParam = sortOrder == "estimated" ? "estimated_desc" : "estimated";
+            reportsSort.ActualSortParam = sortOrder == "actual" ? "actual_desc" : "actual";
+            reportsSort.TestSortParam = sortOrder == "test" ? "test_desc" : "test";
+            reportsSort.TestErrorsSortParam = sortOrder == "testerrors" ? "testerrors_desc" : "testerrors";
+            reportsSort.FieldErrorsSortParam = sortOrder == "fielderrors" ? "fielderrors_desc" : "fielderrors";
+            reportsSort.CommentSortParam = sortOrder == "comment" ? "comment_desc" : "comment";
+
+            return reportsSort;
+        }
+
         public static IQueryable<Script> SortScripts(IQueryable<Script> scripts, string sort)
         {
             switch (sort)

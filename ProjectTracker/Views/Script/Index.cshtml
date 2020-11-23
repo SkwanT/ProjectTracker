@@ -11,6 +11,7 @@
 
 @{
     var filter = ViewBag.SearchFilter as ProjectTracker.ViewModel.SearchFilter;
+    var sort = ViewBag.SortOrder as ProjectTracker.ViewModel.ScriptsSort;
 }
 
 @using (Html.BeginForm("Index", "Script", FormMethod.Get, new { @class = "form-inline", @role = "form" }))
@@ -58,28 +59,28 @@
     <table class="table table-condensed table-striped input-sm">
         <tr class="text-primary">
             <th>
-                @Html.ActionLink("Entry Date", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.DateSortParam })
+                @Html.ActionLink("Entry Date", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = sort.DateSortParam })
             </th>
             <th>
-                @Html.ActionLink("Script Name", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.ScriptSortParam })
+                @Html.ActionLink("Script Name", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = sort.ScriptSortParam })
             </th>
             <th>
-                @Html.ActionLink("Type", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.TypeSortParam })
+                @Html.ActionLink("Type", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = sort.TypeSortParam })
             </th>
             <th>
-                @Html.ActionLink("Author", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.AuthorSortParam })
+                @Html.ActionLink("Author", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = sort.AuthorSortParam })
             </th>
             <th>
-                @Html.ActionLink("Project Name", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.ProjectSortParam })
+                @Html.ActionLink("Project Name", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = sort.ProjectSortParam })
             </th>
             <th>
-                @Html.ActionLink("Status", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.StatusSortParam })
+                @Html.ActionLink("Status", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = sort.StatusSortParam })
             </th>
             <th>
-                @Html.ActionLink("Location", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.LocationSortParam })
+                @Html.ActionLink("Location", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = sort.LocationSortParam })
             </th>
             <th>
-                @Html.ActionLink("Comments", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = ViewBag.CommentSortParam })
+                @Html.ActionLink("Comments", "Index", new { FromDate = filter.FromDate, ToDate = filter.ToDate, ScriptName = filter.ScriptName, ScriptTypeID = filter.ScriptTypeID, AuthorID = filter.AuthorID, ProjectName = filter.ProjectName, ProjectLocation = filter.ProjectLocation, isFinished = filter.isFinished, searchText = ViewBag.Search, sortOrder = sort.CommentSortParam })
             </th>
             <th class="text-right">Actions</th>
         </tr>

@@ -30,7 +30,7 @@ namespace ProjectTracker.Controllers
 
         public int PageSize = 15;
 
-        public ActionResult Index(SearchFilter searchFilter, string searchText, bool isFilterVisible = false, string sortOrder = "task_desc", int page = 1)
+        public ActionResult Index(SearchFilter searchFilter, ReportsSort reportsSort, string searchText, bool isFilterVisible = false, string sortOrder = "task_desc", int page = 1)
         {
             List<SelectListItem> filterStatus = new List<SelectListItem>() {
                 new SelectListItem {Text = "Unfinished", Value = false.ToString()},
@@ -41,24 +41,6 @@ namespace ProjectTracker.Controllers
 
             System.Web.HttpContext.Current.Session["URL"] = Request.Url.AbsoluteUri.ToString();
             System.Web.HttpContext.Current.Session["Reportsort"] = sortOrder.ToString();
-
-            ViewBag.ComplexSortParam = sortOrder == "complex" ? "complex_desc" : "complex";
-            ViewBag.PointsSortParam = sortOrder == "points" ? "points_desc" : "points";
-            ViewBag.CountrySortParam = sortOrder == "country" ? "country_desc" : "country";
-            ViewBag.ScriptSortParam = sortOrder == "script" ? "script_desc" : "script";
-            ViewBag.TypeSortParam = sortOrder == "type" ? "type_desc" : "type";
-            ViewBag.AuthorSortParam = sortOrder == "author" ? "author_desc" : "author";
-            ViewBag.ProjectSortParam = sortOrder == "project" ? "project_desc" : "project";
-            ViewBag.TaskSortParam = sortOrder == "task" ? "task_desc" : "task";
-            ViewBag.StartSortParam = sortOrder == "start" ? "start_desc" : "start";
-            ViewBag.EndSortParam = sortOrder == "end" ? "end_desc" : "end";
-            ViewBag.StatusSortParam = sortOrder == "status" ? "status_desc" : "status";
-            ViewBag.EstimatedSortParam = sortOrder == "estimated" ? "estimated_desc" : "estimated";
-            ViewBag.ActualSortParam = sortOrder == "actual" ? "actual_desc" : "actual";
-            ViewBag.TestSortParam = sortOrder == "test" ? "test_desc" : "test";
-            ViewBag.TestErrorsSortParam = sortOrder == "testerrors" ? "testerrors_desc" : "testerrors";
-            ViewBag.FieldErrorsSortParam = sortOrder == "fielderrors" ? "fielderrors_desc" : "fielderrors";
-            ViewBag.CommentSortParam = sortOrder == "comment" ? "comment_desc" : "comment";
 
             var reports = reportRepository.GetReports(searchText);
 
@@ -75,7 +57,9 @@ namespace ProjectTracker.Controllers
                 }
             }
 
-            ViewBag.SortOrder = sortOrder;
+            reportsSort = SortingHelper.SetSortReports(reportsSort, sortOrder);
+
+            ViewBag.SortOrder = reportsSort;
 
             reports = SortingHelper.SortReports(reports, sortOrder);
 

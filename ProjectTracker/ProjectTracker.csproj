@@ -183,6 +183,7 @@
     <Compile Include="Services\ReportDataFromBase.cs" />
     <Compile Include="Services\ReportService.cs" />
     <Compile Include="ViewModel\ReportsListViewModel.cs" />
+    <Compile Include="ViewModel\ReportsSort.cs" />
     <Compile Include="ViewModel\ScriptDetailsViewModel.cs" />
     <Compile Include="ViewModel\ScriptsListViewModel.cs" />
     <Compile Include="Models\Role.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Models\ScriptType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\AuthorUserView.cs" />
+    <Compile Include="ViewModel\ScriptsSort.cs" />
     <Compile Include="ViewModel\SearchFilter.cs" />
   </ItemGroup>
   <ItemGroup>

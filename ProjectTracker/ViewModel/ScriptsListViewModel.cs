@@ -9,6 +9,7 @@ namespace ProjectTracker.ViewModel
         public IQueryable<Script> Scripts { get; set; }
         public PagingInfo PagingInfo { get; set; }
         public SearchFilter SearchFilter { get; set; }
+        public ScriptsSort ScriptsSort { get; set; }
         public bool IsFilterVisible { get; set; } = false;
     }
 }

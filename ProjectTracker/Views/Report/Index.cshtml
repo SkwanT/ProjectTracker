@@ -15,6 +15,7 @@
 
 @{
     var filter = ViewBag.SearchFilter as ProjectTracker.ViewModel.SearchFilter;
+    var sort = ViewBag.SortOrder as ProjectTracker.ViewModel.ReportsSort;
 }
 
 
@@ -59,71 +60,71 @@
         <tr class="text-primary ">
             <th>
 
-                @Html.ActionLink("Complexity", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.ComplexSortParam })
+                @Html.ActionLink("Complexity", "Index", new { searchText = ViewBag.Search, sortOrder = sort.ComplexSortParam })
             </th>
             <th>
 
-                @Html.ActionLink("Points", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.PointsSortParam })
+                @Html.ActionLink("Points", "Index", new { searchText = ViewBag.Search, sortOrder = sort.PointsSortParam })
             </th>
             <th>
 
-                @Html.ActionLink("Country", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.CountrySortParam })
+                @Html.ActionLink("Country", "Index", new { searchText = ViewBag.Search, sortOrder = sort.CountrySortParam })
             </th>
             <th>
 
-                @Html.ActionLink("Script", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.ScriptSortParam })
+                @Html.ActionLink("Script", "Index", new { searchText = ViewBag.Search, sortOrder = sort.ScriptSortParam })
             </th>
             <th>
 
-                @Html.ActionLink("Type", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.TypeSortParam })
+                @Html.ActionLink("Type", "Index", new { searchText = ViewBag.Search, sortOrder = sort.TypeSortParam })
             </th>
             <th>
 
-                @Html.ActionLink("Author", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.AuthorSortParam })
+                @Html.ActionLink("Author", "Index", new { searchText = ViewBag.Search, sortOrder = sort.AuthorSortParam })
             </th>
             <th>
 
-                @Html.ActionLink("Project", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.ProjectSortParam })
+                @Html.ActionLink("Project", "Index", new { searchText = ViewBag.Search, sortOrder = sort.ProjectSortParam })
             </th>
             <th>
 
-                @Html.ActionLink("Task Date", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.TaskSortParam })
+                @Html.ActionLink("Task Date", "Index", new { searchText = ViewBag.Search, sortOrder = sort.TaskSortParam })
             </th>
             <th>
 
-                @Html.ActionLink("Start Date", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.StartSortParam })
+                @Html.ActionLink("Start Date", "Index", new { searchText = ViewBag.Search, sortOrder = sort.StartSortParam })
             </th>
             <th>
 
-                @Html.ActionLink("End Date", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.EndSortParam })
+                @Html.ActionLink("End Date", "Index", new { searchText = ViewBag.Search, sortOrder = sort.EndSortParam })
             </th>
             <th>
 
-                @Html.ActionLink("Status", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.StatusSortParam })
+                @Html.ActionLink("Status", "Index", new { searchText = ViewBag.Search, sortOrder = sort.StatusSortParam })
             </th>
             <th>
 
-                @Html.ActionLink("Estimated Hours", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.EstimatedSortParam })
+                @Html.ActionLink("Estimated Hours", "Index", new { searchText = ViewBag.Search, sortOrder = sort.EstimatedSortParam })
             </th>
             <th>
 
-                @Html.ActionLink("Actual Hours", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.ActualSortParam })
+                @Html.ActionLink("Actual Hours", "Index", new { searchText = ViewBag.Search, sortOrder = sort.ActualSortParam })
             </th>
             <th>
 
-                @Html.ActionLink("Test Hours", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.TestSortParam })
+                @Html.ActionLink("Test Hours", "Index", new { searchText = ViewBag.Search, sortOrder = sort.TestSortParam })
             </th>
             <th>
 
-                @Html.ActionLink("Test Errors", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.TestErrorsSortParam })
+                @Html.ActionLink("Test Errors", "Index", new { searchText = ViewBag.Search, sortOrder = sort.TestErrorsSortParam })
             </th>
             <th>
 
-                @Html.ActionLink("Field Errors", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.FieldErrorsSortParam })
+                @Html.ActionLink("Field Errors", "Index", new { searchText = ViewBag.Search, sortOrder = sort.FieldErrorsSortParam })
             </th>
             <th>
 
-                @Html.ActionLink("Comments", "Index", new { searchText = ViewBag.Search, sortOrder = ViewBag.CommentSortParam })
+                @Html.ActionLink("Comments", "Index", new { searchText = ViewBag.Search, sortOrder = sort.CommentSortParam })
             </th>
             <th class="text-right">Actions</th>
         </tr>
